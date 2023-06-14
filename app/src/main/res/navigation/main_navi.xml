@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navi"
+    app:startDestination="@id/chapterSelect">
+
+    <fragment
+        android:id="@+id/chapterSelect"
+        android:name="com.ph.fastcam_part2.ChapterSelect"
+        android:label="ChapterSelect" >
+        <action
+            android:id="@+id/action_chapterSelect_to_webToonFragment"
+            app:destination="@id/webToonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webToonFragment"
+        android:name="com.ph.fastcam_part2.chap1.WebToonFragment"
+        android:label="chap1"
+        tools:layout="@layout/chap1" />
+</navigation>
