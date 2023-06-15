@@ -2,4 +2,6 @@
     <string name="app_name">fastcam_part2</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="backBtnText">마지막 시점 돌아가기</string>
+    <string name="changeTabName">탭이름 바꾸기</string>
 </resources>
