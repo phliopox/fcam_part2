@@ -12,6 +12,10 @@ class SecondActivity : AppCompatActivity() {
         binding = ActivitySecondBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.viewPager.apply {
+            adapter = ViewPagerAdapter(this@SecondActivity)
+        }
+/*
         binding.backToLastButton.setOnClickListener {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.frameLayout,WebToonFragment())
@@ -22,7 +26,7 @@ class SecondActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction().apply {
                 //replace()
             }
-        }
+        }*/
 
     }
 
@@ -31,7 +35,8 @@ class SecondActivity : AppCompatActivity() {
         앱이 종료되어버림(나의 경우 이전 activity 인 mainActivity 로 이동) -> super 호출 막기*/
         //super.onBackPressed()
 
-        val currentFragment = supportFragmentManager.fragments[0]
+        //val currentFragment = supportFragmentManager.fragments[0]
+        val currentFragment = supportFragmentManager.fragments[binding.viewPager.currentItem]
         if(currentFragment is WebToonFragment){
             if(currentFragment.canGoBack()){
                 currentFragment.goBack()
