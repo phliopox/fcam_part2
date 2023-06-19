@@ -2,6 +2,7 @@ package com.ph.fastcam_part2.chap1
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.tabs.TabLayoutMediator
 import com.ph.fastcam_part2.R
 import com.ph.fastcam_part2.databinding.ActivitySecondBinding
 
@@ -15,6 +16,12 @@ class SecondActivity : AppCompatActivity() {
         binding.viewPager.apply {
             adapter = ViewPagerAdapter(this@SecondActivity)
         }
+
+        TabLayoutMediator(binding.tabLayout,binding.viewPager){ tab,position->
+            run{
+                tab.text = "position $position"
+            }
+        }.attach()
 /*
         binding.backToLastButton.setOnClickListener {
             supportFragmentManager.beginTransaction().apply {

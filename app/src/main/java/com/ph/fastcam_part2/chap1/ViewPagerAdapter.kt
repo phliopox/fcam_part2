@@ -11,13 +11,13 @@ class ViewPagerAdapter(private val secondActivity: SecondActivity) : FragmentSta
     override fun createFragment(position: Int): Fragment {
         return when(position){
             0->{
-                WebToonFragment()
+                WebToonFragment(position)
             }
             1->{
-                Web2Fragment()
+                WebToonFragment(position)
             }
             else ->{
-                WebToonFragment()
+                WebToonFragment(position)
             }
         }
     }
