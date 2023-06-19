@@ -44,7 +44,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:tint="#FF2B2B" />
+        app:tint="@color/red" />
 
     <ImageView
         android:id="@+id/stopBtn"

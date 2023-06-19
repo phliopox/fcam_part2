@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ph.fastcam_part2.chap1.SecondActivity
 import com.ph.fastcam_part2.databinding.FragmentChapterSelectorBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ChapterSelect : Fragment(),View.OnClickListener {
     private lateinit var binding : FragmentChapterSelectorBinding
@@ -39,6 +42,20 @@ class ChapterSelect : Fragment(),View.OnClickListener {
             }
             R.id.chap2_btn->{
                 findNavController().navigate(R.id.action_chapterSelect_to_recodeFragment)
+            }
+            R.id.testInsert ->{
+                val call: Call<Note> =
+                    RetrofitClient().getApiService().testLogInsert("1234","insertTest","1234", "insertTest", "4")
+
+                call.enqueue(object : Callback<Note?> {
+                    override fun onResponse(call: Call<Note?>, response: Response<Note?>) {
+
+                        Log.d(TAG, "ChapterSelect - onResponse: 성공");
+                    }
+                    override fun onFailure(call: Call<Note?>, t: Throwable) {
+                        Log.d(TAG, "ChapterSelect - onFailure: 실패");
+                    }
+                })
             }
         }
     }
