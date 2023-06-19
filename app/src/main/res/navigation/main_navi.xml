@@ -9,13 +9,14 @@
         android:id="@+id/chapterSelect"
         android:name="com.ph.fastcam_part2.ChapterSelect"
         android:label="ChapterSelect" >
+
         <action
-            android:id="@+id/action_chapterSelect_to_webToonFragment"
-            app:destination="@id/webToonFragment" />
+            android:id="@+id/action_chapterSelect_to_recodeFragment"
+            app:destination="@id/recodeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/webToonFragment"
-        android:name="com.ph.fastcam_part2.chap1.WebToonFragment"
-        android:label="chap1"
-        tools:layout="@layout/chap1" />
+        android:id="@+id/recodeFragment"
+        android:name="com.ph.fastcam_part2.chap2.RecodeFragment"
+        android:label="RecodeFragment" />
+
 </navigation>

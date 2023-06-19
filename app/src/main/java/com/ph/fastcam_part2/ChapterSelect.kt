@@ -32,11 +32,13 @@ class ChapterSelect : Fragment(),View.OnClickListener {
     }
 
     override fun onClick(view: View) {
-        Log.d(TAG, "ChapterSelect - onClick: ${view.id}");
         when(view.id){
             R.id.chap1_btn ->{
                 //  findNavController().navigate(R.id.action_chapterSelect_to_webToonFragment)
                 startActivity(Intent(context,SecondActivity::class.java))
+            }
+            R.id.chap2_btn->{
+                findNavController().navigate(R.id.action_chapterSelect_to_recodeFragment)
             }
         }
     }

@@ -27,7 +27,17 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:background="@drawable/background_whitey_radi24"
-            android:text="웹툰 앱 (웹뷰)"
+            android:text="chap 1 : 웹툰 앱 (웹뷰)"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="30dp"
+            android:id="@+id/chap2_btn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_whitey_radi24"
+            android:text="chap 2 : 녹음기"
             android:textAllCaps="false"
             android:textColor="@color/black"
             />
