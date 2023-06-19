@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ph.fastcam_part2.R
+import com.ph.fastcam_part2.WEB_HISTORY
 import com.ph.fastcam_part2.databinding.ActivitySecondBinding
 
-class SecondActivity : AppCompatActivity() {
-    private lateinit var binding : ActivitySecondBinding
+class SecondActivity : AppCompatActivity(), OnTabLayoutNameChanged {
+    private lateinit var binding: ActivitySecondBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySecondBinding.inflate(layoutInflater)
@@ -17,9 +19,19 @@ class SecondActivity : AppCompatActivity() {
             adapter = ViewPagerAdapter(this@SecondActivity)
         }
 
-        TabLayoutMediator(binding.tabLayout,binding.viewPager){ tab,position->
-            run{
-                tab.text = "position $position"
+
+        val sharedPreferences = getSharedPreferences(WEB_HISTORY, MODE_PRIVATE)
+        val tab0 = sharedPreferences.getString("tab0_name", "월요웹툰")
+        val tab1 = sharedPreferences.getString("tab1_name", "수요웹툰")
+        val tab2 = sharedPreferences.getString("tab2_name", "화요웹툰")
+
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            run {
+                tab.text = when (position) {
+                    0 -> tab0
+                    1 -> tab1
+                    else -> tab2
+                }
             }
         }.attach()
 /*
@@ -44,12 +56,17 @@ class SecondActivity : AppCompatActivity() {
 
         //val currentFragment = supportFragmentManager.fragments[0]
         val currentFragment = supportFragmentManager.fragments[binding.viewPager.currentItem]
-        if(currentFragment is WebToonFragment){
-            if(currentFragment.canGoBack()){
+        if (currentFragment is WebToonFragment) {
+            if (currentFragment.canGoBack()) {
                 currentFragment.goBack()
-            }else{
+            } else {
                 super.onBackPressed() // webView 에 뒤로갈 페이지가 없을경우에만 mainActivity 로 이동
             }
         }
+    }
+
+    override fun nameChanged(position: Int, name: String) {
+        val tab = binding.tabLayout.getTabAt(position)
+        tab?.text = name
     }
 }
