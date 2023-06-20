@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Color.red
+import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Build.VERSION_CODES.M
@@ -26,7 +27,7 @@ import com.ph.fastcam_part2.databinding.Chap2Binding
 import kotlinx.coroutines.NonCancellable.start
 import java.io.IOException
 
-class RecodeFragment : Fragment() {
+class RecodeFragment : Fragment(),OnTimerTickListener {
     private lateinit var binding: Chap2Binding
 
     //상태
@@ -38,7 +39,9 @@ class RecodeFragment : Fragment() {
 
     private var state: State = State.RELEASE // 초기값 릴리즈
     private var recorder: MediaRecorder? = null
+    private var player: MediaPlayer? = null
     private var fileName: String = ""
+    private lateinit var timer : Timer
 
     //요청 권한 결과 받았을때
     private val requestPermissionLauncher =
@@ -73,6 +76,7 @@ class RecodeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         fileName = "${requireActivity().externalCacheDir?.absolutePath}/audiorecodetext.3gp"
+        timer = Timer(this)
 
         binding.recodeBtn.setOnClickListener {
             when (state) {
@@ -86,8 +90,27 @@ class RecodeFragment : Fragment() {
                 else -> {
 
                 }
+            }
+        }
 
-
+        binding.playBtn.setOnClickListener {
+            when (state) {
+                State.RELEASE -> {
+                    onPlay(true)
+                }
+                else -> {
+                    //do nothing
+                }
+            }
+        }
+        binding.stopBtn.setOnClickListener {
+            when (state) {
+                State.PLAYING -> {
+                    onPlay(false)
+                }
+                else -> {
+                    //do nothing
+                }
             }
         }
     }
@@ -147,11 +170,8 @@ class RecodeFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun onRecord(start: Boolean) = if (start) {
-        startRecording()
-    } else {
-        stopRecording()
-    }
+    private fun onRecord(start: Boolean) = if (start) startRecording() else stopRecording()
+    private fun onPlay(start: Boolean) = if (start) startPlaying() else stopPlaying()
 
     private fun startRecording() {
         state = State.RECODING
@@ -170,8 +190,16 @@ class RecodeFragment : Fragment() {
 
             start()
         }
+
+        timer.start()
+
         binding.recodeBtn.apply {
-            setImageDrawable(  ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_stop_24))
+            setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_stop_24
+                )
+            )
             imageTintList = ColorStateList.valueOf(Color.BLACK)
         }
         binding.playBtn.apply {
@@ -186,14 +214,62 @@ class RecodeFragment : Fragment() {
             release()
         }
         recorder = null
+        timer.stop()
+
         state = State.RELEASE
         binding.recodeBtn.apply {
-            setImageDrawable(  ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_fiber_manual_record_24))
-            imageTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(),R.color.red))
+            setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_fiber_manual_record_24
+                )
+            )
+            imageTintList =
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.red))
         }
         binding.playBtn.apply {
             isEnabled = true
             alpha = 1.0f
         }
+    }
+
+    private fun startPlaying() {
+        state = State.PLAYING
+
+        player = MediaPlayer().apply {
+            setDataSource(fileName)
+            try {
+                prepare()
+            } catch (e: IOException) {
+                Log.d(TAG, "RecodeFragment - startPlaying:play prepare failed $e");
+            }
+            start()
+        }
+
+        //파일 재생이 끝났을 때
+        player?.setOnCompletionListener {
+            stopPlaying()
+        }
+
+        binding.recodeBtn.apply {
+            isEnabled = false
+            alpha = 0.3f
+        }
+    }
+
+    private fun stopPlaying() {
+        state = State.RELEASE
+
+        player?.release()
+        player = null
+
+        binding.recodeBtn.apply {
+            isEnabled = true
+            alpha = 1.0f
+        }
+    }
+
+    override fun onTick(duration: Long) {
+        binding.waveFormView.addAmplitude(recorder?.maxAmplitude?.toFloat()?:0f)
     }
 }
