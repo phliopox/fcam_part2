@@ -281,7 +281,7 @@ class RecodeFragment : Fragment(), OnTimerTickListener {
         binding.timeTextView.text =
             String.format("%02d:%02d:%02d", minute, second, millisecond / 10)
         if (state == State.PLAYING) {
-            binding.waveFormView.replayAmplitude(duration.toInt())
+            binding.waveFormView.replayAmplitude()
         } else if (state == State.RECODING) {
             binding.waveFormView.addAmplitude(recorder?.maxAmplitude?.toFloat() ?: 0f)
         }
