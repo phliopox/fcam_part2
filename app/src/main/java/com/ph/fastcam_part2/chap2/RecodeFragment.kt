@@ -27,7 +27,7 @@ import com.ph.fastcam_part2.databinding.Chap2Binding
 import kotlinx.coroutines.NonCancellable.start
 import java.io.IOException
 
-class RecodeFragment : Fragment(),OnTimerTickListener {
+class RecodeFragment : Fragment(), OnTimerTickListener {
     private lateinit var binding: Chap2Binding
 
     //상태
@@ -41,7 +41,7 @@ class RecodeFragment : Fragment(),OnTimerTickListener {
     private var recorder: MediaRecorder? = null
     private var player: MediaPlayer? = null
     private var fileName: String = ""
-    private lateinit var timer : Timer
+    private lateinit var timer: Timer
 
     //요청 권한 결과 받았을때
     private val requestPermissionLauncher =
@@ -190,7 +190,7 @@ class RecodeFragment : Fragment(),OnTimerTickListener {
 
             start()
         }
-
+        binding.waveFormView.clearData()
         timer.start()
 
         binding.recodeBtn.apply {
@@ -245,6 +245,8 @@ class RecodeFragment : Fragment(),OnTimerTickListener {
             }
             start()
         }
+        binding.waveFormView.clearWave()
+        timer.start()
 
         //파일 재생이 끝났을 때
         player?.setOnCompletionListener {
@@ -263,6 +265,8 @@ class RecodeFragment : Fragment(),OnTimerTickListener {
         player?.release()
         player = null
 
+        timer.stop()
+
         binding.recodeBtn.apply {
             isEnabled = true
             alpha = 1.0f
@@ -270,6 +274,16 @@ class RecodeFragment : Fragment(),OnTimerTickListener {
     }
 
     override fun onTick(duration: Long) {
-        binding.waveFormView.addAmplitude(recorder?.maxAmplitude?.toFloat()?:0f)
+        val millisecond = duration % 1000
+        val second = (duration / 1000) % 60
+        val minute = (duration / 1000 / 60)
+
+        binding.timeTextView.text =
+            String.format("%02d:%02d:%02d", minute, second, millisecond / 10)
+        if (state == State.PLAYING) {
+            binding.waveFormView.replayAmplitude(duration.toInt())
+        } else if (state == State.RECODING) {
+            binding.waveFormView.addAmplitude(recorder?.maxAmplitude?.toFloat() ?: 0f)
+        }
     }
 }
