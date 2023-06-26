@@ -24,12 +24,14 @@ public interface RetrofitInterface {
 
     @FormUrlEncoded
     @POST("/vending/sold.php")
-    Call<Note> testLogInsert(
+    Call<Note> soldInfoPost(
             @Field("kiosk") String kiosk,
             @Field("product") String product,
-            @Field("number") String number,
+            @Field("no") String number,
             @Field("singleset") String singleset,
-            @Field("expiration") String quantity
+            @Field("expiration") String exp,
+            @Field("quantity") String quantity
+
     );
 }
 

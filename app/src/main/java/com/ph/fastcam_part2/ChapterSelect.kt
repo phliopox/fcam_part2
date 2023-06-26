@@ -45,7 +45,7 @@ class ChapterSelect : Fragment(),View.OnClickListener {
             }
             R.id.testInsert ->{
                 val call: Call<Note> =
-                    RetrofitClient().getApiService().testLogInsert("1234","insertTest","1234", "insertTest", "4")
+                    RetrofitClient().getApiService().soldInfoPost("test_kiosk","test_product","100", "test_singleset", "test_exp","200")
 
                 call.enqueue(object : Callback<Note?> {
                     override fun onResponse(call: Call<Note?>, response: Response<Note?>) {
