@@ -23,7 +23,7 @@
         android:label="RecodeFragment" />
     <fragment
         android:id="@+id/gitRepoFragment"
-        android:name="com.ph.fastcam_part2.chap3.GitRepoFragment"
+        android:name="com.ph.fastcam_part2.chap4.GitRepoFragment"
         android:label="GitRepoFragment" />
 
 </navigation>

@@ -1,4 +1,4 @@
-package com.ph.fastcam_part2.chap3
+package com.ph.fastcam_part2.chap4
 
 import android.os.Bundle
 import android.util.Log
@@ -15,7 +15,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class GitRepoFragment : Fragment() {
-    private lateinit var binding : Chap4Binding
+    private lateinit var binding: Chap4Binding
+    private val userAdapter = UserAdapter()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,14 +44,21 @@ class GitRepoFragment : Fragment() {
 
         })
 
+
+
+        binding.userRecyclerView.apply {
+            adapter = userAdapter
+        }
         githubService.searchUsers("squar").enqueue(object : Callback<UserDto>{
             override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {
-                Log.d(TAG, "GitRepoFragment - onResponse SearchUser: ${response.body().toString()}");
+                userAdapter.submitList(response.body()?.items)
             }
 
             override fun onFailure(call: Call<UserDto>, t: Throwable) {
                 Log.d(TAG, "GitRepoFragment - onFailure: ${t.message}");
             }
         })
+
+
     }
 }
