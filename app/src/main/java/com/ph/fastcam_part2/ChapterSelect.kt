@@ -43,7 +43,10 @@ class ChapterSelect : Fragment(),View.OnClickListener {
             R.id.chap2_btn->{
                 findNavController().navigate(R.id.action_chapterSelect_to_recodeFragment)
             }
-            R.id.testInsert ->{
+            R.id.chap3_btn ->{
+                findNavController().navigate(R.id.action_chapterSelect_to_socketFragment)
+            }
+    /*        R.id.testInsert ->{
                 val call: Call<Note> =
                     RetrofitClient().getApiService().soldInfoPost("test_kiosk","test_product","100", "test_singleset", "test_exp","200")
 
@@ -56,7 +59,7 @@ class ChapterSelect : Fragment(),View.OnClickListener {
                         Log.d(TAG, "ChapterSelect - onFailure: 실패");
                     }
                 })
-            }
+            }*/
         }
     }
 }

@@ -43,6 +43,17 @@
             />
         <androidx.appcompat.widget.AppCompatButton
             android:layout_marginTop="30dp"
+            android:id="@+id/chap3_btn"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_whitey_radi24"
+            android:text="chap 4 : 깃 레포 조회(retrofit)"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="30dp"
             android:id="@+id/testInsert"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
@@ -50,6 +61,7 @@
             android:text="roadBanding"
             android:textAllCaps="false"
             android:textColor="@color/black"
+            android:visibility="gone"
             />
 
     </LinearLayout>
