@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ph.fastcam_part2.R
 import com.ph.fastcam_part2.TAG
+import com.ph.fastcam_part2.chap4.ApiClient.retrofit
 import com.ph.fastcam_part2.databinding.Chap4Binding
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.awaitClose
@@ -28,10 +29,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 class GitRepoFragment : Fragment() {
     private lateinit var binding: Chap4Binding
     private lateinit var userAdapter :UserAdapter
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://api.github.com/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -114,7 +111,7 @@ class GitRepoFragment : Fragment() {
     }
 
     private fun searchUser(query: String) {
-        val githubService = retrofit.create(GithubApi::class.java)
+        val githubService = ApiClient.retrofit.create(GithubApi::class.java)
 
         githubService.searchUsers(query).enqueue(object : Callback<UserDto> {
             override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {

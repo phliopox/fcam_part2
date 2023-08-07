@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ph.fastcam_part2.databinding.Chap4ItemResultBinding
 import com.ph.fastcam_part2.databinding.Chap4ItemUserBinding
 import com.ph.fastcam_part2.databinding.Chap4ResultBinding
-//private val onClick: (Repo) -> Unit
-class RepoAdapter() : ListAdapter<Repo, RepoAdapter.RepoViewHolder>(diffUtil) {
+class RepoAdapter(private val onClick :(Repo) -> Unit) : ListAdapter<Repo, RepoAdapter.RepoViewHolder>(diffUtil) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
@@ -31,7 +30,7 @@ class RepoAdapter() : ListAdapter<Repo, RepoAdapter.RepoViewHolder>(diffUtil) {
             binding.forkCountTextView.text = "${item.forkCount}"
 
             binding.root.setOnClickListener {
-              //  onClick(item)
+                onClick(item)
             }
         }
 
