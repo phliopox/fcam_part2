@@ -7,6 +7,7 @@ plugins {
     //room
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+    id("com.google.gms.google-services") //firebase
 }
 
 android {
@@ -72,4 +73,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     // Gson 변환기
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-database-ktx")
+    implementation("com.google.firebase:firebase-messaging-ktx")
+
 }
