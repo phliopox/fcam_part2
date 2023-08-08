@@ -9,6 +9,7 @@ import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ph.fastcam_part2.chap1.SecondActivity
+import com.ph.fastcam_part2.chap6.ChatMainActivity
 import com.ph.fastcam_part2.databinding.FragmentChapterSelectorBinding
 
 class ChapterSelect : Fragment(),View.OnClickListener {
@@ -43,7 +44,9 @@ class ChapterSelect : Fragment(),View.OnClickListener {
                 findNavController().navigate(R.id.action_chapterSelect_to_socketFragment)
             }
             R.id.chap6_btn->{
-                findNavController().navigate(R.id.action_chapterSelect_to_chatMainFragment)
+              //  findNavController().navigate(R.id.action_chapterSelect_to_chatMainFragment)
+                val intent = Intent(requireContext(),ChatMainActivity::class.java)
+                startActivity(intent)
             }
     /*        R.id.testInsert ->{
                 val call: Call<Note> =

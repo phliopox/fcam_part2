@@ -16,9 +16,6 @@
         <action
             android:id="@+id/action_chapterSelect_to_socketFragment"
             app:destination="@id/gitRepoFragment" />
-        <action
-            android:id="@+id/action_chapterSelect_to_chatMainFragment"
-            app:destination="@id/chatMainFragment" />
     </fragment>
     <fragment
         android:id="@+id/recodeFragment"
@@ -36,21 +33,5 @@
         android:id="@+id/resultFragment"
         android:name="com.ph.fastcam_part2.chap4.ResultFragment"
         android:label="ResultFragment" />
-    <fragment
-        android:id="@+id/chatMainFragment"
-        android:name="com.ph.fastcam_part2.chap6.ChatMainFragment"
-        android:label="ChatMainFragment" >
-        <action
-            android:id="@+id/action_chatMainFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.ph.fastcam_part2.chap6.LoginFragment"
-        android:label="LoginFragment" >
-        <action
-            android:id="@+id/action_loginFragment_to_chatMainFragment"
-            app:destination="@id/chatMainFragment" />
-    </fragment>
 
 </navigation>
