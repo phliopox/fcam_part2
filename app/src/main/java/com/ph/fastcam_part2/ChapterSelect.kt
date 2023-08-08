@@ -2,7 +2,6 @@ package com.ph.fastcam_part2
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ph.fastcam_part2.chap1.SecondActivity
 import com.ph.fastcam_part2.databinding.FragmentChapterSelectorBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class ChapterSelect : Fragment(),View.OnClickListener {
     private lateinit var binding : FragmentChapterSelectorBinding
@@ -43,8 +39,11 @@ class ChapterSelect : Fragment(),View.OnClickListener {
             R.id.chap2_btn->{
                 findNavController().navigate(R.id.action_chapterSelect_to_recodeFragment)
             }
-            R.id.chap3_btn ->{
+            R.id.chap4_btn ->{
                 findNavController().navigate(R.id.action_chapterSelect_to_socketFragment)
+            }
+            R.id.chap6_btn->{
+                findNavController().navigate(R.id.action_chapterSelect_to_chatMainFragment)
             }
     /*        R.id.testInsert ->{
                 val call: Call<Note> =
