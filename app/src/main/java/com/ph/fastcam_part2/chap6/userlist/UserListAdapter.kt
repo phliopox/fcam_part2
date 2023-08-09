@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ph.fastcam_part2.databinding.Chap6ItemUserBinding
 
-class ChatUserAdapter : ListAdapter<UserItem, ChatUserAdapter.ViewHolder>(differ) {
+class UserListAdapter : ListAdapter<UserItem, UserListAdapter.ViewHolder>(differ) {
 
     private lateinit var binding : Chap6ItemUserBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

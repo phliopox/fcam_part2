@@ -14,10 +14,16 @@ class UserFragment : Fragment(R.layout.chap6_userlist) {
         super.onViewCreated(view, savedInstanceState)
         binding = Chap6UserlistBinding.bind(view)
 
-        val userListAdapter = ChatUserAdapter()
+        val userListAdapter = UserListAdapter()
         binding.userListRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = userListAdapter
         }
+
+        userListAdapter.submitList(
+            mutableListOf<UserItem?>().apply {
+                add(UserItem("22","22","33"))
+            }
+        )
     }
 }
