@@ -4,7 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.ph.fastcam_part2.R
+import com.ph.fastcam_part2.chap6.DBKey.Companion.DB_CHAT_ROOMS
 import com.ph.fastcam_part2.databinding.Chap6ChatlistBinding
 
 // Fragment(R.layout.chap6_userlist) 이렇게 선언시 oncreateview 를 오버라이딩 하지않아도 된다..!!
@@ -20,10 +27,20 @@ class ChatListFragment : Fragment(R.layout.chap6_chatlist) {
             adapter = chatListAdapter
         }
 
-        chatListAdapter.submitList(
-            mutableListOf<ChatRoomItem?>().apply {
-                add(ChatRoomItem("22","22","33"))
+        val currentUserId = Firebase.auth.currentUser?.uid ?: return
+        val chatRoomsDB = Firebase.database.reference.child(DB_CHAT_ROOMS).child(currentUserId)
+        chatRoomsDB.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val chatRoomList = snapshot.children.map {
+                    it.getValue(ChatRoomItem::class.java)
+                }
+                chatListAdapter.submitList(chatRoomList)
             }
-        )
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
     }
 }
