@@ -45,7 +45,7 @@ class ChapterSelect : Fragment(),View.OnClickListener {
             }
             R.id.chap6_btn->{
               //  findNavController().navigate(R.id.action_chapterSelect_to_chatMainFragment)
-                val intent = Intent(requireContext(),ChatMainActivity::class.java)
+                val intent = Intent(context,ChatMainActivity::class.java)
                 startActivity(intent)
             }
     /*        R.id.testInsert ->{

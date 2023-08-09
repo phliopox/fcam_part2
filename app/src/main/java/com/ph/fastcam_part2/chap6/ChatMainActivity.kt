@@ -10,6 +10,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.ph.fastcam_part2.R
 import com.ph.fastcam_part2.chap6.chatlist.ChatListFragment
+import com.ph.fastcam_part2.chap6.mypage.MyPageFragment
 import com.ph.fastcam_part2.chap6.userlist.UserFragment
 import com.ph.fastcam_part2.databinding.Chap6Binding
 
@@ -17,8 +18,9 @@ class ChatMainActivity : AppCompatActivity() {
     private lateinit var binding: Chap6Binding
     private val userListFragment = UserFragment()
     private val chatListFragment = ChatListFragment()
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    private val myPageFragment = MyPageFragment()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding= Chap6Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -40,6 +42,7 @@ class ChatMainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.myPage ->{
+                    replaceFragment(myPageFragment)
                     return@setOnItemSelectedListener true
                 }
                 else ->{
