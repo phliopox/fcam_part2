@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ph.fastcam_part2.databinding.Chap6ItemChatroomBinding
-import com.ph.fastcam_part2.databinding.Chap6ItemUserBinding
 
 class ChatListAdapter : ListAdapter<ChatRoomItem, ChatListAdapter.ViewHolder>(differ) {
 

@@ -26,6 +26,7 @@
         <activity android:name=".chap1.SecondActivity" />
         <activity android:name=".chap6.ChatMainActivity"/>
         <activity android:name=".chap6.LoginActivity"/>
+        <activity android:name=".chap6.chatdetail.ChatDetailActivity"/>
     </application>
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
