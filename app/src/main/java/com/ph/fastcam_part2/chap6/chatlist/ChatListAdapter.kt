@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ph.fastcam_part2.databinding.Chap6ItemChatroomBinding
 
-class ChatListAdapter : ListAdapter<ChatRoomItem, ChatListAdapter.ViewHolder>(differ) {
+class ChatListAdapter(private val onClick : (ChatRoomItem)->Unit) : ListAdapter<ChatRoomItem, ChatListAdapter.ViewHolder>(differ) {
 
     private lateinit var binding : Chap6ItemChatroomBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,6 +23,10 @@ class ChatListAdapter : ListAdapter<ChatRoomItem, ChatListAdapter.ViewHolder>(di
         fun bind(item:ChatRoomItem){
             binding.nicknameTextView.text = item.otherUserName
             binding.lastMessageTextView.text = item.lastMessage
+
+            binding.root.setOnClickListener {
+                onClick(item)
+            }
         }
     }
     companion object{

@@ -36,6 +36,7 @@ class ChatAdapter : ListAdapter<ChatItem, ChatAdapter.ViewHolder>(differ) {
                 binding.messageTextView.text = item.message
                 binding.messageTextView.gravity = Gravity.END
             }
+
         }
     }
     companion object{

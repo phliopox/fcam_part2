@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ph.fastcam_part2.databinding.Chap6ItemUserBinding
 
-class UserListAdapter : ListAdapter<UserItem, UserListAdapter.ViewHolder>(differ) {
+class UserListAdapter(private val onClick : (UserItem)->Unit ) : ListAdapter<UserItem, UserListAdapter.ViewHolder>(differ) {
 
     private lateinit var binding : Chap6ItemUserBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,6 +23,10 @@ class UserListAdapter : ListAdapter<UserItem, UserListAdapter.ViewHolder>(differ
         fun bind(item:UserItem){
             binding.nicknameTextView.text = item.username
             binding.descriptionTextView.text = item.description
+
+            binding.root.setOnClickListener {
+                onClick(item)
+            }
         }
     }
     companion object{
